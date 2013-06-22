@@ -1,3 +1,5 @@
+#include "stdio.h"
+
 void shift_bits(unsigned char* adr, int n, int shift)
 {
 	if ((n <= 0) || (shift <= 0))
@@ -23,4 +25,15 @@ void shift_bits(unsigned char* adr, int n, int shift)
 			}
 		}
 	}
+}
+
+int main (void)
+{
+	char *string = "asdfasdf";
+	size_t len = strlen (string);
+	unsigned char *pool = (unsigned char *) malloc (len);
+	memcpy (pool, string, len - 1);
+	shift_bits (pool, len, sizeof (char));		//shift for one char, \n untuched
+	printf ("%s", (char *)pool);
+	free (pool);
 }
