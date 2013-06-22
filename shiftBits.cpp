@@ -32,8 +32,8 @@ int main (void)
 	char *string = "asdfasdf";
 	size_t len = strlen (string);
 	unsigned char *pool = (unsigned char *) malloc (len);
-	memcpy (pool, string, len - 1);
-	shift_bits (pool, len, sizeof (char));		//shift for one char, \n untuched
+	memcpy (pool, string, len);
+	shift_bits (pool, len - 1, sizeof (char));		//shift for one char, \n untouched
 	printf ("%s", (char *)pool);
 	free (pool);
 }
