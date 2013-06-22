@@ -1,25 +1,25 @@
 void shift_bits(unsigned char* adr, int n, int shift)
 {
 	if ((n <= 0) || (shift <= 0))
-		return;	//Не нужно ничего делать - либо некорректные данные
+		return;
 	for (size_t i = 0; i < shift; ++i)
-	{	//цикл по количеству сдвигов (можно сдвиг, кратный длине char обработать отдельно)
-		unsigned char last_one = (unsigned char) *(adr + n - 1) & 1;	//последний бит в цепочке. он станет первым
+	{
+		unsigned char last_one = (unsigned char) *(adr + n - 1) & 1;
 		for (size_t j = n - 1; ; --j)
-		{	//цикл с конца цепочки
+		{
 			if (j == 0)	
-			{	//первый элемент цепочки - у него нет предыдущего, берём первый бит из last_one
+			{
 				*adr = *adr >> 1;
 				if (last_one)
-					*adr = *adr + (1 << (sizeof(char) - 1));
+					*adr = *adr + (unsigned char)(1 << (sizeof(char) - 1));
 				break;
 			}
 			else
 			{
-				unsigned char previous_one = (unsigned char) *(adr + j - 1) & 1;	//узнаю последний бит предыдущего байти в цепочке
+				unsigned char previous_one = (unsigned char) *(adr + j - 1) & 1;
 				*(adr + j) = *(adr + j) >> 1;
 				if (previous_one)
-					*(adr + j) = *(adr + j) + (1 << (sizeof(char) - 1));
+					*(adr + j) = *(adr + j) +  (unsigned char) (1 << (sizeof(char) - 1));
 			}
 		}
 	}
