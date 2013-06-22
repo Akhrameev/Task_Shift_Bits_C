@@ -11,7 +11,7 @@ void shift_bits(unsigned char* adr, int n, int shift)
 			{	//первый элемент цепочки - у него нет предыдущего, берём первый бит из last_one
 				*adr = *adr >> 1;
 				if (last_one)
-					*adr = *adr + (1 << (sizeof(char) - 1));
+					*adr = *adr + (unsigned char)(1 << (sizeof(char) - 1));
 				break;
 			}
 			else
@@ -19,7 +19,7 @@ void shift_bits(unsigned char* adr, int n, int shift)
 				unsigned char previous_one = (unsigned char) *(adr + j - 1) & 1;	//узнаю последний бит предыдущего байти в цепочке
 				*(adr + j) = *(adr + j) >> 1;
 				if (previous_one)
-					*(adr + j) = *(adr + j) + (1 << (sizeof(char) - 1));
+					*(adr + j) = *(adr + j) +  (unsigned char) (1 << (sizeof(char) - 1));
 			}
 		}
 	}
